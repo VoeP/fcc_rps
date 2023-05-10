@@ -37,6 +37,6 @@ def player(prev_play, opponent_history=[], play_orders={}):
   paper=play_orders.get(sequence+"P",0)
   scissors=play_orders.get(sequence+"S",0)
   max_index=np.argmax([rock, paper, scissors])
-  prediction=["R", "P", "S"][max_index]
+  prediction=MOVES[max_index]
 
   return RESPONSES[prediction]
