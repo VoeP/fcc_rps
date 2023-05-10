@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import random
 import numpy as np
 
@@ -11,9 +10,10 @@ RESPONSES = {
     'P': 'S',
     'S': 'R'
 }
+OBSERVED_PLAYS={}
 
 
-def player(prev_play, opponent_history=[], play_orders={}):
+def player(prev_play, opponent_history=[], play_orders=OBSERVED_PLAYS):
   steps = MIN_LEN
 
   if prev_play != '':
@@ -37,6 +37,7 @@ def player(prev_play, opponent_history=[], play_orders={}):
   paper=play_orders.get(sequence+"P",0)
   scissors=play_orders.get(sequence+"S",0)
   max_index=np.argmax([rock, paper, scissors])
-  prediction=MOVES[max_index]
-
+  prediction=["R", "P", "S"][max_index]
+  if len(opponent_history)==1000:
+      play_orders={}
   return RESPONSES[prediction]
